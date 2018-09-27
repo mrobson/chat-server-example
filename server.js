@@ -8,11 +8,11 @@ var io = require('socket.io')(http);
 
 
 const REDIS_URL = 'redis';
+const REDIS_PW = 'redis';
 const AUTH_URL = 'auth'
-
 // Redis
 // create and connect redis client to local instance.
-const client = redis.createClient(6379, REDIS_URL, {password: 'SpYHEmq5iAkp8CYo'});
+const client = redis.createClient(6379, REDIS_URL, {password: REDIS_PW});
 
 const room_name = 'tonronto_cc';
 var chat_members = [];
