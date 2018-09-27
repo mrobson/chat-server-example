@@ -1,0 +1,18 @@
+{
+  "room_name": {
+    "chatters": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e"
+    ],
+    "chat_msgs": [{
+      "sender": "a",
+      "msg": "hi"
+    },{
+      "sender": "b",
+      "msg": "hi"
+    }]
+  }
+}
