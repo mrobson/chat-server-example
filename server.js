@@ -9,7 +9,7 @@ var io = require('socket.io')(http);
 
 const REDIS_URL = 'redis';
 const REDIS_PW = 'redis';
-const AUTH_URL = 'auth'
+const AUTH_URL = 'auth';
 // Redis
 // create and connect redis client to local instance.
 const client = redis.createClient(6379, REDIS_URL, {password: REDIS_PW});
@@ -19,28 +19,11 @@ var chat_members = [];
 var chat_msgs = [];
 client.on('ready', function () {
 
+  console.log('redis connected')
     // Flush Redis DB
     // client.flushdb();
 
 
-    // client.set(
-    //     room_name, JSON.stringify({
-    //         "chat_members": [
-    //             "a",
-    //             "b",
-    //             "c",
-    //             "d",
-    //             "e"
-    //         ],
-    //         "chat_msgs": [{
-    //             "sender": "a",
-    //             "msg": "hi"
-    //         }, {
-    //             "sender": "b",
-    //             "msg": "hi"
-    //         }]
-    //     })
-    // );
 
 // Initialize User/Msgs
     client.get(room_name, function (err, reply) {
