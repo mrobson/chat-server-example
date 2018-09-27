@@ -180,13 +180,18 @@ io.on('connection', function (socket) {
 
 app.get('/get_messages', function (req, res) {
     console.log("getMes");
-    console.log(chat_msgs)
+    console.log(chat_msgs);
     res.send(chat_msgs);
 });
 
 
 app.get('/get_chat_members', function (req, res) {
     res.send(chat_members);
+});
+
+app.get('/healthz', function (req, res) {
+   console.log("Health check: OK");
+    res.send("OK");
 });
 
 
