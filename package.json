@@ -1,0 +1,21 @@
+{
+  "name": "chat-example",
+  "version": "0.0.1",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.15.2",
+    "ioredis": "^4.0.0",
+    "redis": "^2.8.0",
+    "request": "^2.88.0",
+    "response-time": "^2.3.2",
+    "socket.io": "^2.1.1"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "start:server": "nodemon server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
