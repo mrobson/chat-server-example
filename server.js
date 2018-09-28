@@ -188,7 +188,7 @@ function formattedData(chat_members, chat_msgs) {
 }
 
 
-http.listen(3000, '0.0.0.0', function (err) {
+http.listen(8080, '0.0.0.0', function (err) {
     if (err) throw err
-    console.log('listening on 0.0.0.0 port 3000')
+    console.log('listening on 0.0.0.0 port 8080')
 })
