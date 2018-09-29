@@ -168,7 +168,7 @@ io.on('connection', function (socket) {
 app.get('/get_messages', function (req, res) {
     console.log("getMes");
     console.log(chat_msgs);
-    res.send(chat_msgs);
+    res.send('');
 });
 
 
