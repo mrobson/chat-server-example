@@ -181,13 +181,24 @@ app.get('/healthz', function (req, res) {
     res.send("OK");
 });
 
+app.get('/emulate', function (req, res) {
+    var client_msg = req.query.client_msg;
+    request('http://' + AUTH_URL + ':8080/auth?id=' + id, {json: true}, (err, res2, body) => {
+        if (err) {
+            return console.log(err);
+        }
 
-function formattedData(chat_members, chat_msgs) {
-    return JSON.stringify({
-        "chat_members": chat_members,
-        "chat_msgs": chat_msgs
     });
-}
+
+    res.send('chat-client(' + client_msg + ') => chat-server => auth(' + body + ') => redis => chat-server => chat-client');
+});
+
+// function formattedData(chat_members, chat_msgs) {
+//     return JSON.stringify({
+//         "chat_members": chat_members,
+//         "chat_msgs": chat_msgs
+//     });
+// }
 
 
 http.listen(8080, '0.0.0.0', function (err) {
