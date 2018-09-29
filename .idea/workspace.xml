@@ -17,26 +17,26 @@
       <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="172" lean-forward="true" selection-start-line="172" selection-end-line="172" />
+            <state relative-caret-position="223">
+              <caret line="170" lean-forward="true" selection-start-line="170" selection-end-line="170" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server-noRedis.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="server-noRedis.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server-noRedis.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1646">
-              <caret line="189" selection-start-line="189" selection-end-line="189" />
+            <state relative-caret-position="356">
+              <caret line="181" column="3" lean-forward="true" selection-start-line="181" selection-start-column="3" selection-end-line="181" selection-end-column="3" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server-redis.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="server-redis.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server-redis.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2229">
-              <caret line="202" column="38" selection-start-line="202" selection-start-column="38" selection-end-line="202" selection-end-column="38" />
+            <state relative-caret-position="309">
+              <caret line="74" column="36" lean-forward="true" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -168,11 +168,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/redis" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -200,24 +200,24 @@
       <updated>1537886730384</updated>
       <workItem from="1537886733059" duration="7135000" />
       <workItem from="1537910778002" duration="39988000" />
-      <workItem from="1538189101844" duration="3895000" />
+      <workItem from="1538189101844" duration="4924000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51018000" />
+    <option name="totallyTimeSpent" value="52047000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="3840" y="0" width="1920" height="1080" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.33263817" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.33263817" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -240,7 +240,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server.js</url>
-          <line>45</line>
+          <line>32</line>
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="1" />
@@ -369,24 +369,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/server-redis.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="74" column="36" lean-forward="true" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="172" lean-forward="true" selection-start-line="172" selection-end-line="172" />
+        <state relative-caret-position="223">
+          <caret line="170" lean-forward="true" selection-start-line="170" selection-end-line="170" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server-noRedis.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1646">
-          <caret line="189" selection-start-line="189" selection-end-line="189" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server-redis.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2229">
-          <caret line="202" column="38" selection-start-line="202" selection-start-column="38" selection-end-line="202" selection-end-column="38" />
+        <state relative-caret-position="356">
+          <caret line="181" column="3" lean-forward="true" selection-start-line="181" selection-start-column="3" selection-end-line="181" selection-end-column="3" />
         </state>
       </provider>
     </entry>
