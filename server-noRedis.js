@@ -6,10 +6,29 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const redis = require('redis');
 
-const AUTH_URL = 'auth';
 
-// const REDIS_URL = 'redis';
-// const REDIS_PW = 'redis';
+var cors = require('cors');
+
+
+const REDIS_PW = 'redis';
+
+//real test
+const REDIS_URL = 'redis';
+const AUTH_URL = 'auth';
+const origin_url='http://chat-client.apps.toronto.openshiftworkshop.com'
+
+//local test
+// const REDIS_URL = 'localhost';
+// const AUTH_URL = 'localhost';
+// const origin_url='http://localhost:4200';
+
+
+app.use(cors());
+app.use(cors({
+    origin: origin_url,
+    withCredentials: true
+}));
+
 
 // // Redis
 // // create and connect redis client to local instance.
@@ -52,12 +71,12 @@ const AUTH_URL = 'auth';
 var chat_members = [];
 var chat_msgs = [];
 
-app.all('/*', function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Credentials", "true");
-    next();
-});
+// app.all('/*', function (req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     res.header("Access-Control-Allow-Credentials", "true");
+//     next();
+// });
 
 // app.use(bodyParser.urlencoded({
 //     extended: true
