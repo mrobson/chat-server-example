@@ -58,20 +58,21 @@ app.get('/login', function (req, res, next) {
         }
 
 
-        if (res2.statusCode === '503') {
+        if (res2.statusCode === 503) {
             res.send({
                 'status': '503',
                 'msg': 'Auth Server Unavailable'
             });
-        } else if (res2.statusCode === '504') {
+        } else if (res2.statusCode === 504) {
             res.send({
                 'status': '504',
                 'msg': 'Auth Server Gateway Timeout'
             });
         }
-        if (res2.statusCode === '200') {
+        if (res2.statusCode === 200) {
             auth = true;
         }
+
 
         // if (body === 'Auth OK') {
         //     auth = true;
@@ -201,14 +202,14 @@ app.get('/emulate', function (req, res) {
             return console.log(err);
         }
 
-        if (res2.statusCode === '503') {
+        if (res2.statusCode === 503) {
             auth_msg = 'Auth Server - 503 error';
             res.send(return_msg + 'auth(' + auth_msg + ')');
-        } else if (res2.statusCode === '504') {
+        } else if (res2.statusCode === 504) {
             auth_msg = 'Auth Server - 504 error';
             res.send(return_msg + 'auth(' + auth_msg + ')');
         }
-        if (res2.statusCode === '200') {
+        if (res2.statusCode === 200) {
             auth_msg = '200 ok(' + body + ')';
         }
 

@@ -75,9 +75,26 @@ app.get('/login', function (req, res, next) {
             return console.log(err);
         }
 
-        if (body === 'Auth OK') {
+
+        if (res2.statusCode === 503) {
+            res.send({
+                'status': '503',
+                'msg': 'Auth Server Unavailable'
+            });
+        } else if (res2.statusCode === 504) {
+            res.send({
+                'status': '504',
+                'msg': 'Auth Server Gateway Timeout'
+            });
+        }
+        if (res2.statusCode === 200) {
             auth = true;
         }
+
+
+        // if (body === 'Auth OK') {
+        //     auth = true;
+        // }
 
         if (auth && chat_members.indexOf(id) === -1) {
             chat_members.push(id);
