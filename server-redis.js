@@ -171,7 +171,11 @@ app.get('/get_messages', function (req, res) {
     console.log(chat_msgs);
 
     client.get(room_name, function (err, reply) {
-        chat_msgs = JSON.parse(reply).chat_msgs;
+        if (reply !== null) {
+            chat_msgs = JSON.parse(reply).chat_msgs;
+        }else{
+            chat_msgs.flush;
+        }
     });
 
     res.send(chat_msgs);
