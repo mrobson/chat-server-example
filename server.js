@@ -29,7 +29,7 @@ app.use(cors({
 }));
 
 // Server Version
-const serverVersion = 'v1';
+const serverVersion = 'v2';
 
 
 // Redis
