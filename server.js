@@ -12,14 +12,14 @@ var cors = require('cors');
 const REDIS_PW = 'redis';
 
 //real test
-const REDIS_URL = 'redis';
-const AUTH_URL = 'auth';
-const origin_url='http://chat-client.apps.toronto.openshiftworkshop.com'
+// const REDIS_URL = 'redis';
+// const AUTH_URL = 'auth';
+// const origin_url = 'http://chat-client.apps.toronto.openshiftworkshop.com'
 
 //local test
-// const REDIS_URL = 'localhost';
-// const AUTH_URL = 'localhost';
-// const origin_url = 'http://localhost:4200';
+const REDIS_URL = 'localhost';
+const AUTH_URL = 'localhost';
+const origin_url = 'http://localhost:4200';
 
 
 app.use(cors());
@@ -27,6 +27,9 @@ app.use(cors({
     origin: origin_url,
     withCredentials: true
 }));
+
+// Server Version
+const serverVersion = 'v1';
 
 
 // Redis
@@ -66,7 +69,12 @@ app.get('/login', function (req, res, next) {
 
     request('http://' + AUTH_URL + ':8080/auth?id=' + id, {json: true}, (err, res2, body) => {
         if (err) {
-            return console.log(err);
+            console.log(err);
+
+            res.send({
+                'status': 'Auth Server Unavailable',
+                'msg': 'Auth Server Unavailable'
+            });
         }
 
 
@@ -85,7 +93,6 @@ app.get('/login', function (req, res, next) {
             auth = true;
         }
 
-        console.log
         // if (body === 'Auth OK') {
         //     auth = true;
         // }
@@ -155,8 +162,6 @@ app.get('/leave', function (req, res, next) {
 
 app.get('/get_redhat_logo', function (req, res, next) {
 
-
-    // Download to a directory and save with an another filename
     options = {
         url: 'https://connect.redhat.com/sites/all/themes/rhc4tp/dist/images/logo-rh.png',
         dest: __dirname + '/logo-rh.png'
@@ -165,14 +170,14 @@ app.get('/get_redhat_logo', function (req, res, next) {
     download.image(options)
         .then(({filename, image}) => {
             console.log('File saved to', filename)
-            base64Img.base64(options.dest, function(err, data) {
+            base64Img.base64(options.dest, function (err, data) {
                 res.send(data);
             })
 
         })
         .catch((err) => {
             console.error(err)
-            base64Img.base64('./internet_access_fail.png', function(err, data) {
+            base64Img.base64('./internet_access_fail.png', function (err, data) {
                 res.send(data);
             })
 
@@ -227,6 +232,11 @@ app.get('/get_chat_members', function (req, res) {
     res.send(chat_members);
 });
 
+app.get('/get_server_version', function (req, res) {
+    res.send({"version": serverVersion});
+});
+
+
 app.get('/healthz', function (req, res) {
     console.log("Health check: OK");
     res.send("OK");
@@ -277,8 +287,8 @@ function formattedData(chat_members, chat_msgs) {
 }
 
 
-http.listen(8080, '0.0.0.0',  function (err) {
-// http.listen(3000, function (err) {
+// http.listen(8080, '0.0.0.0', function (err) {
+http.listen(3000, function (err) {
     // if (err) throw err
     if (err) {
         console.log(err);
