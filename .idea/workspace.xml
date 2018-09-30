@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="41a44608-6a53-4ddd-a60d-12d69163a8ae" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-noRedis.js" beforeDir="false" afterPath="$PROJECT_DIR$/server-noRedis.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-redis.js" beforeDir="false" afterPath="$PROJECT_DIR$/server-redis.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-    </list>
+    <list default="true" id="41a44608-6a53-4ddd-a60d-12d69163a8ae" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -20,20 +14,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" selection-start-line="23" selection-end-line="28" />
+            <state relative-caret-position="255">
+              <caret line="17" column="72" lean-forward="true" selection-start-line="17" selection-start-column="72" selection-end-line="17" selection-end-column="72" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server-noRedis.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="server-noRedis.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server-noRedis.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2014">
-              <caret line="78" column="6" lean-forward="true" selection-start-line="73" selection-start-column="3" selection-end-line="78" selection-end-column="6" />
+            <state relative-caret-position="386">
+              <caret line="238" column="4" lean-forward="true" selection-start-line="238" selection-start-column="4" selection-end-line="238" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -217,12 +211,12 @@
       <updated>1537886730384</updated>
       <workItem from="1537886733059" duration="7135000" />
       <workItem from="1537910778002" duration="39988000" />
-      <workItem from="1538189101844" duration="18280000" />
+      <workItem from="1538189101844" duration="19087000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65403000" />
+    <option name="totallyTimeSpent" value="66210000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1920" height="1080" extended-state="6" />
@@ -258,7 +252,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server.js</url>
-          <line>51</line>
+          <line>34</line>
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="1" />
@@ -401,17 +395,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
+    <entry file="file://$PROJECT_DIR$/server-noRedis.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" selection-start-line="23" selection-end-line="28" />
+        <state relative-caret-position="386">
+          <caret line="238" column="4" lean-forward="true" selection-start-line="238" selection-start-column="4" selection-end-line="238" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server-noRedis.js">
+    <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2014">
-          <caret line="78" column="6" lean-forward="true" selection-start-line="73" selection-start-column="3" selection-end-line="78" selection-end-column="6" />
+        <state relative-caret-position="255">
+          <caret line="17" column="72" lean-forward="true" selection-start-line="17" selection-start-column="72" selection-end-line="17" selection-end-column="72" />
         </state>
       </provider>
     </entry>
