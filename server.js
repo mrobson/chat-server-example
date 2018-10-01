@@ -13,7 +13,7 @@ const REDIS_PW = 'redis';
 
 //real test
 const REDIS_URL = 'redis';
-const AUTH_URL = 'auth';
+const AUTH_URL = 'auth:8080';
 const origin_url = 'http://chat-client.apps.toronto.openshiftworkshop.com'
 
 //local test
@@ -274,7 +274,7 @@ app.get('/emulate', function (req, res_emulate) {
     return_msg.push({'layer': 'Chat Server', 'msg': 'Got you. Will request Auth'});
     request( "http://" + AUTH_URL +'/auth?id=' + id, {json: true}, (err, res2, body) => {
         if (err) {
-
+            console.log();
             return_msg.push({'layer': 'Auth Server', 'msg': err.errno})
             status_code = 503;
             res_emulate.send({'flow': return_msg});
@@ -289,6 +289,10 @@ app.get('/emulate', function (req, res_emulate) {
             auth_msg = body;
             status_code = 504;
             return_msg.push({'layer': 'Auth Server', 'msg': auth_msg});
+        } else if (res2.statusCode === 404) {
+            auth_msg = body;
+            status_code = 404;
+            return_msg.push({'layer': 'Auth Server', 'msg': '404 error'});
         }
         if (res2.statusCode === 200) {
             return_msg.push({'layer': 'Auth Server', 'msg': body});
