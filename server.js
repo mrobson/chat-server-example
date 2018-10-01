@@ -14,7 +14,8 @@ const REDIS_PW = 'redis';
 //real test
 const REDIS_URL = 'redis';
 const AUTH_URL = 'auth:8080';
-const origin_url = 'http://chat-client.apps.toronto.openshiftworkshop.com'
+// const origin_url = 'http://chat-client.apps.toronto.openshiftworkshop.com'
+const origin_url = '*';
 
 //local test
 // const REDIS_URL = 'localhost';
@@ -300,7 +301,7 @@ app.get('/emulate', function (req, res_emulate) {
 
             return_msg.push({'layer': 'Chat Server', 'msg': 'Got Auth. Redis!'});
             if (isRedisGood) {
-                console.log("Redis is not good status");
+                console.log("Redis is good status");
 
                 client.get(room_name, function (err, result) {
                     console.log(JSON.parse(result));
@@ -315,6 +316,7 @@ app.get('/emulate', function (req, res_emulate) {
                     res_emulate.send({'flow': return_msg});
                 });
             } else {
+                console.log("Redis is not good status");
                 return_msg.push({'layer': 'Redis', 'msg': redisErrorMsg});
                 res_emulate.status(status_code);
                 res_emulate.send({'flow': return_msg});
