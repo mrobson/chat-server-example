@@ -29,7 +29,7 @@ app.use(cors({
 }));
 
 // Server Version
-const serverVersion = 'v1';
+const serverVersion = 'v2';
 let isRedisGood = false;
 let redisErrorMsg = '';
 
@@ -269,21 +269,25 @@ app.get('/emulate', function (req, res_emulate) {
     var id = req.query.id;
     let auth_msg = '';
     let return_msg = [];
+    let status_code = 200;
     return_msg.push({'layer': 'Chat Client', 'msg': 'Hi~ I am ' + id});
     return_msg.push({'layer': 'Chat Server', 'msg': 'Got you. Will request Auth'});
     request('http://' + AUTH_URL + ':8080/auth?id=' + id, {json: true}, (err, res2, body) => {
         if (err) {
 
             return_msg.push({'layer': 'Auth Server', 'msg': err.errno})
+            status_code = 503;
             res_emulate.send({'flow': return_msg});
             return console.log(err);
         }
 
         if (res2.statusCode === 503) {
             auth_msg = body;
+            status_code = 503;
             return_msg.push({'layer': 'Auth Server', 'msg': auth_msg});
         } else if (res2.statusCode === 504) {
             auth_msg = body;
+            status_code = 504;
             return_msg.push({'layer': 'Auth Server', 'msg': auth_msg});
         }
         if (res2.statusCode === 200) {
@@ -299,19 +303,24 @@ app.get('/emulate', function (req, res_emulate) {
                     if (err === null) {
                         return_msg.push({'layer': 'Redis', 'msg': 'Loaded Messages'});
                     } else {
+                        status_code = 503;
                         return_msg.push({'layer': 'Redis', 'msg': err.errno});
                         return
                     }
+                    res_emulate.status(status_code);
                     res_emulate.send({'flow': return_msg});
                 });
             } else {
                 return_msg.push({'layer': 'Redis', 'msg': redisErrorMsg});
+                res_emulate.status(status_code);
                 res_emulate.send({'flow': return_msg});
             }
         } else {
+            res_emulate.status(status_code);
             res_emulate.send({'flow': return_msg});
         }
         console.log(return_msg);
+
 
     });
 
