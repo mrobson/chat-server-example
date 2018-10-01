@@ -12,14 +12,14 @@ var cors = require('cors');
 const REDIS_PW = 'redis';
 
 //real test
-// const REDIS_URL = 'redis';
-// const AUTH_URL = 'auth';
-// const origin_url = 'http://chat-client.apps.toronto.openshiftworkshop.com'
+const REDIS_URL = 'redis';
+const AUTH_URL = 'auth';
+const origin_url = 'http://chat-client.apps.toronto.openshiftworkshop.com'
 
 //local test
-const REDIS_URL = 'localhost';
-const AUTH_URL = 'localhost';
-const origin_url = 'http://localhost:4200';
+// const REDIS_URL = 'localhost';
+// const AUTH_URL = 'localhost';
+// const origin_url = 'http://localhost:4200';
 
 
 app.use(cors());
@@ -328,8 +328,8 @@ function formattedData(chat_members, chat_msgs) {
 }
 
 
-// http.listen(8080, '0.0.0.0', function (err) {
-http.listen(3000, function (err) {
+http.listen(8080, '0.0.0.0', function (err) {
+// http.listen(3000, function (err) {
     // if (err) throw err
     if (err) {
         console.log(err);
