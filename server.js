@@ -12,14 +12,14 @@ var cors = require('cors');
 const REDIS_PW = 'redis';
 
 //real test
-const REDIS_URL = 'redis';
-const AUTH_URL = 'auth';
-const origin_url = 'http://chat-client.apps.toronto.openshiftworkshop.com'
+// const REDIS_URL = 'redis';
+// const AUTH_URL = 'auth';
+// const origin_url = 'http://chat-client.apps.toronto.openshiftworkshop.com'
 
 //local test
-// const REDIS_URL = 'localhost';
-// const AUTH_URL = 'localhost';
-// const origin_url = 'http://localhost:4200';
+const REDIS_URL = 'localhost';
+const AUTH_URL = 'localhost';
+const origin_url = 'http://localhost:4200';
 
 
 app.use(cors());
@@ -30,11 +30,31 @@ app.use(cors({
 
 // Server Version
 const serverVersion = 'v2';
-
+let isRedisGood = false;
+let redisErrorMsg = '';
 
 // Redis
 // create and connect redis client to local instance.
-const client = redis.createClient(6379, REDIS_URL, {password: REDIS_PW});
+const client = redis.createClient(6379, REDIS_URL, {password: REDIS_PW}, {
+    retry_strategy: function (options) {
+        if (options.error && options.error.code === 'ECONNREFUSED') {
+            // End reconnecting on a specific error and flush all commands with
+            // a individual error
+            return new Error('The server refused the connection');
+        }
+        if (options.total_retry_time > 1000 * 600 * 600) {
+            // End reconnecting after a specific timeout and flush all commands
+            // with a individual error
+            return new Error('Retry time exhausted');
+        }
+        if (options.attempt > 1000000) {
+            // End reconnecting with built in error
+            return undefined;
+        }
+        // reconnect after
+        return Math.min(options.attempt * 100, 500);
+    }
+});
 
 const room_name = 'tonronto_cc';
 var chat_members = [];
@@ -42,6 +62,7 @@ var chat_msgs = [];
 client.on('ready', function () {
 
     console.log('redis connected')
+    isRedisGood = true;
     // Flush Redis DB
     // client.flushdb();
 
@@ -57,6 +78,8 @@ client.on('ready', function () {
 // Print redis errors to the console
 client.on('error', (err) => {
     console.log("Error " + err);
+    isRedisGood = false;
+    redisErrorMsg = err.errno;
 });
 
 
@@ -242,41 +265,59 @@ app.get('/healthz', function (req, res) {
     res.send("OK");
 });
 
-app.get('/emulate', function (req, res) {
-    var client_msg = req.query.client_msg;
+app.get('/emulate', function (req, res_emulate) {
+    var id = req.query.id;
     let auth_msg = '';
-    let return_msg = 'chat-client(' + client_msg + ') => chat-server => ';
+    let return_msg = [];
+    return_msg.push({'layer': 'Chat Client', 'msg': 'Hi~ I am ' + id});
+    return_msg.push({'layer': 'Chat Server', 'msg': 'Got you. Will request Auth'});
     request('http://' + AUTH_URL + ':8080/auth?id=' + id, {json: true}, (err, res2, body) => {
-
         if (err) {
+
+            return_msg.push({'layer': 'Auth Server', 'msg': err.errno})
+            res_emulate.send({'flow': return_msg});
             return console.log(err);
         }
 
         if (res2.statusCode === 503) {
-            auth_msg = 'Auth Server - 503 error';
-            res.send(return_msg + 'auth(' + auth_msg + ')');
+            auth_msg = body;
+            return_msg.push({'layer': 'Auth Server', 'msg': auth_msg});
         } else if (res2.statusCode === 504) {
-            auth_msg = 'Auth Server - 504 error';
-            res.send(return_msg + 'auth(' + auth_msg + ')');
+            auth_msg = body;
+            return_msg.push({'layer': 'Auth Server', 'msg': auth_msg});
         }
         if (res2.statusCode === 200) {
-            auth_msg = '200 ok(' + body + ')';
-        }
+            return_msg.push({'layer': 'Auth Server', 'msg': body});
+            console.log(return_msg);
 
-        if (body === 'Auth OK') {
-            client.get(room_name, function (err, result) {
-                console.log(JSON.parse(result));
-                if (err === null) {
-                    res.send(return_msg + 'auth(' + auth_msg + ') => redis(' + err + ')');
-                }
-            });
+            return_msg.push({'layer': 'Chat Server', 'msg': 'Got Auth. Redis!'});
+            if (isRedisGood) {
+                console.log("Redis is not good status");
+
+                client.get(room_name, function (err, result) {
+                    console.log(JSON.parse(result));
+                    if (err === null) {
+                        return_msg.push({'layer': 'Redis', 'msg': 'Loaded Messages'});
+                    } else {
+                        return_msg.push({'layer': 'Redis', 'msg': err.errno});
+                        return
+                    }
+                    res_emulate.send({'flow': return_msg});
+                });
+            } else {
+                return_msg.push({'layer': 'Redis', 'msg': redisErrorMsg});
+                res_emulate.send({'flow': return_msg});
+            }
+        } else {
+            res_emulate.send({'flow': return_msg});
         }
+        console.log(return_msg);
 
     });
 
 
-    res.send('chat-client(' + client_msg + ') => chat-server => auth(' + auth_msg + ') => redis => chat-server => chat-client');
-});
+})
+;
 
 function formattedData(chat_members, chat_msgs) {
 
@@ -287,8 +328,8 @@ function formattedData(chat_members, chat_msgs) {
 }
 
 
-http.listen(8080, '0.0.0.0', function (err) {
-// http.listen(3000, function (err) {
+// http.listen(8080, '0.0.0.0', function (err) {
+http.listen(3000, function (err) {
     // if (err) throw err
     if (err) {
         console.log(err);
