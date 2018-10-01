@@ -90,7 +90,7 @@ app.get('/login', function (req, res, next) {
 
     console.log(id + " try to login");
 
-    request( AUTH_URL +'/auth?id=' + id, {json: true}, (err, res2, body) => {
+    request( "http://" + AUTH_URL +'/auth?id=' + id, {json: true}, (err, res2, body) => {
         if (err) {
             console.log(err);
 
@@ -272,7 +272,7 @@ app.get('/emulate', function (req, res_emulate) {
     let status_code = 200;
     return_msg.push({'layer': 'Chat Client', 'msg': 'Hi~ I am ' + id});
     return_msg.push({'layer': 'Chat Server', 'msg': 'Got you. Will request Auth'});
-    request( AUTH_URL +'/auth?id=' + id, {json: true}, (err, res2, body) => {
+    request( "http://" + AUTH_URL +'/auth?id=' + id, {json: true}, (err, res2, body) => {
         if (err) {
 
             return_msg.push({'layer': 'Auth Server', 'msg': err.errno})
