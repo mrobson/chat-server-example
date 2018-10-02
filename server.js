@@ -84,6 +84,17 @@ client.on('error', (err) => {
 });
 
 
+app.get('/dbflush', function (req, res, next) {
+    // Flush Redis DB
+    client.flushdb();
+    chat_members.flush;
+    chat_msgs.flush;
+    res.send({
+        'status': 'OK'
+    });
+}
+
+
 app.get('/login', function (req, res, next) {
     var auth = false;
     var id = req.query.id;
