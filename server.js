@@ -97,7 +97,7 @@ app.get('/dbflush', function (req, res, next) {
     res.send({
         'status': 'OK'
     });
-}
+});
 
 
 app.get('/login', function (req, res, next) {
