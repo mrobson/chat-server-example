@@ -101,13 +101,13 @@ app.get('/dbflush', function (req, res, next) {
 
 
 app.get('/login', function (req, res, next) {
-    var auth = false;
+
     var id = req.query.id;
     // var pw = req.query.pw;
 
     console.log(id + " try to login");
 
-    request( "http://" + AUTH_URL +'/auth?id=' + id, {json: true}, (err, res2, body) => {
+    request("http://" + AUTH_URL + '/auth?id=' + id, {json: true}, (err, res2, body) => {
         if (err) {
             console.log(err);
 
@@ -130,27 +130,26 @@ app.get('/login', function (req, res, next) {
             });
         }
         if (res2.statusCode === 200) {
-            auth = true;
-        }
 
-        if (auth && chat_members.indexOf(id) === -1) {
-            chat_members.push(id);
+            if (chat_members.indexOf(id) === -1) {
+                chat_members.push(id);
 
-            client.set(room_name, formattedData(chat_members, chat_msgs));
-            res.send({
-                'chat_members': chat_members,
-                'status': 'OK'
+                client.set(room_name, formattedData(chat_members, chat_msgs));
+                res.send({
+                    'chat_members': chat_members,
+                    'status': 'OK'
+                });
+            } else {
+                res.send({
+                    'status': 'DUP_NAME',
+                    'msg': 'DUPLICATE NAME'
+                });
+            }
+
+            client.get(room_name, function (err, result) {
+                console.log(JSON.parse(result));
             });
-        } else {
-            res.send({
-                'status': 'DUP_NAME',
-                'msg': 'DUPLICATE NAME'
-            });
         }
-
-        client.get(room_name, function (err, result) {
-            console.log(JSON.parse(result));
-        });
     });
 
 
@@ -285,7 +284,7 @@ app.get('/emulate', function (req, res_emulate) {
     let status_code = 200;
     return_msg.push({'layer': 'Chat Client', 'msg': 'Hi~ I am ' + id});
     return_msg.push({'layer': 'Chat Server', 'msg': 'Got you. Will request Auth'});
-    request( "http://" + AUTH_URL +'/auth?id=' + id, {json: true}, (err, res2, body) => {
+    request("http://" + AUTH_URL + '/auth?id=' + id, {json: true}, (err, res2, body) => {
         if (err) {
             console.log('err');
             return_msg.push({'layer': 'Auth Server', 'msg': err.errno})
@@ -295,34 +294,35 @@ app.get('/emulate', function (req, res_emulate) {
         }
 
         if (res2.statusCode === 503) {
-            console.log('503');
             console.log(body);
             auth_msg = body;
             status_code = 503;
-            return_msg.push({'layer': 'Auth Server', 'msg': auth_msg});
+            return_msg.push({'layer': 'Auth Server(' + statusCode + ')', 'msg': auth_msg});
         } else if (res2.statusCode === 504) {
             console.log('504');
             console.log(body);
 
             auth_msg = body;
             status_code = 504;
-            return_msg.push({'layer': 'Auth Server', 'msg': auth_msg});
+            return_msg.push({'layer': 'Auth Server(' + statusCode + ')', 'msg': auth_msg});
         } else if (res2.statusCode === 404) {
             console.log('404');
             console.log(body);
 
             auth_msg = body;
             status_code = 404;
-            return_msg.push({'layer': 'Auth Server', 'msg': '404 error'});
+            return_msg.push({'layer': 'Auth Server(' + statusCode + ')', 'msg': auth_msg});
         }
         if (res2.statusCode === 200) {
-            console.log('202');
+            console.log('200');
             console.log(body);
 
-            return_msg.push({'layer': 'Auth Server', 'msg': body});
-            console.log(return_msg);
+            auth_msg = body;
+            return_msg.push({'layer': 'Auth Server(' + statusCode + ')', 'msg': auth_msg});
 
             return_msg.push({'layer': 'Chat Server', 'msg': 'Got Auth. Redis!'});
+            console.log(return_msg);
+
             if (isRedisGood) {
                 console.log("Redis is good status");
 
@@ -349,7 +349,6 @@ app.get('/emulate', function (req, res_emulate) {
             res_emulate.send({'flow': return_msg});
         }
         console.log(return_msg);
-
 
     });
 

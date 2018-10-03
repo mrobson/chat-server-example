@@ -20,8 +20,8 @@
       <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="679">
-              <caret line="350" column="28" lean-forward="true" selection-start-line="350" selection-start-column="28" selection-end-line="350" selection-end-column="28" />
+            <state relative-caret-position="650">
+              <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
             </state>
           </provider>
         </entry>
@@ -107,6 +107,7 @@
       <find>emul</find>
       <find>res</find>
       <find>AUTH_URL</find>
+      <find>redisErrorMsg</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;http://&quot; + AUTH_URL</replace>
@@ -155,7 +156,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2076" />
+    <option name="x" value="1926" />
+    <option name="y" value="111" />
     <option name="width" value="1910" />
     <option name="height" value="810" />
   </component>
@@ -221,12 +223,20 @@
       <workItem from="1537886733059" duration="7135000" />
       <workItem from="1537910778002" duration="39988000" />
       <workItem from="1538189101844" duration="54809000" />
-      <workItem from="1538573154362" duration="746000" />
+      <workItem from="1538573154362" duration="3240000" />
     </task>
+    <task id="LOCAL-00001" summary="error fix">
+      <created>1538574187496</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1538574187496</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102678000" />
+    <option name="totallyTimeSpent" value="105172000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1920" height="1080" extended-state="6" />
@@ -256,6 +266,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="error fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="error fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -470,8 +484,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="679">
-          <caret line="350" column="28" lean-forward="true" selection-start-line="350" selection-start-column="28" selection-end-line="350" selection-end-column="28" />
+        <state relative-caret-position="650">
+          <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
         </state>
       </provider>
     </entry>
