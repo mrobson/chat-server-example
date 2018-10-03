@@ -30,7 +30,7 @@ app.use(cors({
 }));
 
 // Server Version
-const serverVersion = 'v2';
+const serverVersion = 'v1';
 
 // Redis variable
 let isRedisGood = false;
@@ -319,7 +319,7 @@ app.get('/emulate', function (req, res_emulate) {
             console.log('200');
             console.log(body);
 
-            status_code = 202;
+            status_code = 200;
             auth_msg = body;
             return_msg.push({'layer': 'Auth Server(' + status_code + ')', 'msg': auth_msg});
 
