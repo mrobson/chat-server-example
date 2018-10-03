@@ -299,21 +299,21 @@ app.get('/emulate', function (req, res_emulate) {
             console.log(body);
             auth_msg = body;
             status_code = 503;
-            return_msg.push({'layer': 'Auth Server(' + statusCode + ')', 'msg': auth_msg});
+            return_msg.push({'layer': 'Auth Server(' + status_code + ')', 'msg': auth_msg});
         } else if (res2.statusCode === 504) {
             console.log('504');
             console.log(body);
 
             auth_msg = body;
             status_code = 504;
-            return_msg.push({'layer': 'Auth Server(' + statusCode + ')', 'msg': auth_msg});
+            return_msg.push({'layer': 'Auth Server(' + status_code + ')', 'msg': auth_msg});
         } else if (res2.statusCode === 404) {
             console.log('404');
             console.log(body);
 
             auth_msg = body;
             status_code = 404;
-            return_msg.push({'layer': 'Auth Server(' + statusCode + ')', 'msg': auth_msg});
+            return_msg.push({'layer': 'Auth Server(' + status_code + ')', 'msg': auth_msg});
         }
         if (res2.statusCode === 200) {
             console.log('200');
@@ -321,7 +321,7 @@ app.get('/emulate', function (req, res_emulate) {
 
             status_code = 202;
             auth_msg = body;
-            return_msg.push({'layer': 'Auth Server(' + statusCode + ')', 'msg': auth_msg});
+            return_msg.push({'layer': 'Auth Server(' + status_code + ')', 'msg': auth_msg});
 
             return_msg.push({'layer': 'Chat Server', 'msg': 'Got Auth. Redis!'});
             console.log(return_msg);
