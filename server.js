@@ -17,7 +17,7 @@ const AUTH_URL = 'auth:8080';
 // const origin_url = 'http://chat-client.apps.toronto.openshiftworkshop.com'
 const origin_url = '*';
 
-//l ocal test
+// local test
 // const REDIS_URL = 'localhost';
 // const AUTH_URL = 'localhost';
 // const origin_url = 'http://localhost:4200';
@@ -31,6 +31,8 @@ app.use(cors({
 
 // Server Version
 const serverVersion = 'v2';
+
+// Redis variable
 let isRedisGood = false;
 let redisErrorMsg = '';
 
@@ -317,6 +319,7 @@ app.get('/emulate', function (req, res_emulate) {
             console.log('200');
             console.log(body);
 
+            status_code = 202;
             auth_msg = body;
             return_msg.push({'layer': 'Auth Server(' + statusCode + ')', 'msg': auth_msg});
 
