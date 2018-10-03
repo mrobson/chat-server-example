@@ -11,13 +11,13 @@ var cors = require('cors');
 
 const REDIS_PW = 'redis';
 
-//real test
+// real test
 const REDIS_URL = 'redis';
 const AUTH_URL = 'auth:8080';
 // const origin_url = 'http://chat-client.apps.toronto.openshiftworkshop.com'
 const origin_url = '*';
 
-//local test
+//l ocal test
 // const REDIS_URL = 'localhost';
 // const AUTH_URL = 'localhost';
 // const origin_url = 'http://localhost:4200';
@@ -33,6 +33,13 @@ app.use(cors({
 const serverVersion = 'v2';
 let isRedisGood = false;
 let redisErrorMsg = '';
+
+
+// Chat variables
+const room_name = 'tonronto_cc';
+var chat_members = [];
+var chat_msgs = [];
+
 
 // Redis
 // create and connect redis client to local instance.
@@ -57,15 +64,10 @@ const client = redis.createClient(6379, REDIS_URL, {password: REDIS_PW}, {
     }
 });
 
-const room_name = 'tonronto_cc';
-var chat_members = [];
-var chat_msgs = [];
-client.on('ready', function () {
 
+client.on('ready', function () {
     console.log('redis connected')
     isRedisGood = true;
-    // Flush Redis DB
-    // client.flushdb();
 
     // Initialize User/Msgs
     client.get(room_name, function (err, reply) {
@@ -83,12 +85,15 @@ client.on('error', (err) => {
     redisErrorMsg = err.errno;
 });
 
-
+// Restful API
 app.get('/dbflush', function (req, res, next) {
-    // Flush Redis DB
+    // Flush Redis DB data
     client.flushdb();
+
+    // Flush Server data
     chat_members.flush;
     chat_msgs.flush;
+
     res.send({
         'status': 'OK'
     });
@@ -127,10 +132,6 @@ app.get('/login', function (req, res, next) {
         if (res2.statusCode === 200) {
             auth = true;
         }
-
-        // if (body === 'Auth OK') {
-        //     auth = true;
-        // }
 
         if (auth && chat_members.indexOf(id) === -1) {
             chat_members.push(id);
@@ -286,7 +287,7 @@ app.get('/emulate', function (req, res_emulate) {
     return_msg.push({'layer': 'Chat Server', 'msg': 'Got you. Will request Auth'});
     request( "http://" + AUTH_URL +'/auth?id=' + id, {json: true}, (err, res2, body) => {
         if (err) {
-            console.log();
+            console.log('err');
             return_msg.push({'layer': 'Auth Server', 'msg': err.errno})
             status_code = 503;
             res_emulate.send({'flow': return_msg});
@@ -294,19 +295,30 @@ app.get('/emulate', function (req, res_emulate) {
         }
 
         if (res2.statusCode === 503) {
+            console.log('503');
+            console.log(body);
             auth_msg = body;
             status_code = 503;
             return_msg.push({'layer': 'Auth Server', 'msg': auth_msg});
         } else if (res2.statusCode === 504) {
+            console.log('504');
+            console.log(body);
+
             auth_msg = body;
             status_code = 504;
             return_msg.push({'layer': 'Auth Server', 'msg': auth_msg});
         } else if (res2.statusCode === 404) {
+            console.log('404');
+            console.log(body);
+
             auth_msg = body;
             status_code = 404;
             return_msg.push({'layer': 'Auth Server', 'msg': '404 error'});
         }
         if (res2.statusCode === 200) {
+            console.log('202');
+            console.log(body);
+
             return_msg.push({'layer': 'Auth Server', 'msg': body});
             console.log(return_msg);
 
