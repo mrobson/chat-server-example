@@ -284,12 +284,12 @@ app.get('/emulate', function (req, res_emulate) {
     let auth_msg = '';
     let return_msg = [];
     let status_code = 200;
-    return_msg.push({'layer': 'Chat Client', 'msg': 'Hi~ I am ' + id});
-    return_msg.push({'layer': 'Chat Server', 'msg': 'Got you. Will request Auth'});
+    return_msg.push({'layer': 'Chat Client', 'msg': 'I am ' + id});
+    return_msg.push({'layer': 'Chat Server', 'msg': 'Will request Auth'});
     request("http://" + AUTH_URL + '/auth?id=' + id, {json: true}, (err, res2, body) => {
         if (err) {
             console.log('err');
-            return_msg.push({'layer': 'Auth Server', 'msg': err.errno})
+            return_msg.push({'layer': 'Auth', 'msg': err.errno})
             status_code = 503;
             res_emulate.send({'flow': return_msg});
             return console.log(err);
@@ -299,21 +299,21 @@ app.get('/emulate', function (req, res_emulate) {
             console.log(body);
             auth_msg = body;
             status_code = 503;
-            return_msg.push({'layer': 'Auth Server(' + status_code + ')', 'msg': auth_msg});
+            return_msg.push({'layer': 'Auth(' + status_code + ')', 'msg': auth_msg});
         } else if (res2.statusCode === 504) {
             console.log('504');
             console.log(body);
 
             auth_msg = body;
             status_code = 504;
-            return_msg.push({'layer': 'Auth Server(' + status_code + ')', 'msg': auth_msg});
+            return_msg.push({'layer': 'Auth(' + status_code + ')', 'msg': auth_msg});
         } else if (res2.statusCode === 404) {
             console.log('404');
             console.log(body);
 
             auth_msg = body;
             status_code = 404;
-            return_msg.push({'layer': 'Auth Server(' + status_code + ')', 'msg': auth_msg});
+            return_msg.push({'layer': 'Auth(' + status_code + ')', 'msg': auth_msg});
         }
         if (res2.statusCode === 200) {
             console.log('200');
@@ -321,18 +321,18 @@ app.get('/emulate', function (req, res_emulate) {
 
             status_code = 200;
             auth_msg = body;
-            return_msg.push({'layer': 'Auth Server(' + status_code + ')', 'msg': auth_msg});
+            return_msg.push({'layer': 'Auth(' + status_code + ')', 'msg': auth_msg});
 
-            return_msg.push({'layer': 'Chat Server', 'msg': 'Got Auth. Redis!'});
+            return_msg.push({'layer': 'Chat Server', 'msg': 'Got Auth!'});
             console.log(return_msg);
 
             if (isRedisGood) {
-                console.log("Redis is good status");
+                console.log("Redis is up!");
 
                 client.get(room_name, function (err, result) {
                     console.log(JSON.parse(result));
                     if (err === null) {
-                        return_msg.push({'layer': 'Redis', 'msg': 'Loaded Messages'});
+                        return_msg.push({'layer': 'Redis', 'msg': 'Loaded'});
                     } else {
                         status_code = 503;
                         return_msg.push({'layer': 'Redis', 'msg': err.errno});
