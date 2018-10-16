@@ -332,9 +332,9 @@ app.get('/emulate', function (req, res_emulate) {
                 client.get(room_name, function (err, result) {
                     console.log(JSON.parse(result));
                     if (err === null) {
-                        return_msg.push({'layer': 'Time', 'msg': Date().getTime()});
+                        return_msg.push({'layer': 'Time', 'msg': new Date().getTime()});
                     } else {
-                        return_msg.push({'layer': 'Time', 'msg': Date().getTime()});
+                        return_msg.push({'layer': 'Time', 'msg': new Date().getTime()});
                         return
                     }
                     res_emulate.status(status_code);
