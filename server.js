@@ -332,9 +332,9 @@ app.get('/emulate', function (req, res_emulate) {
                 client.get(room_name, function (err, result) {
                     console.log(JSON.parse(result));
                     if (err === null) {
-                        return_msg.push({'layer': 'Time', 'msg': new Date().toLocaleTimeString()});
+                        return_msg.push({'layer': 'Time', 'msg': new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York' })});
                     } else {
-                        return_msg.push({'layer': 'Time', 'msg': new Date().toLocaleTimeString()});
+                        return_msg.push({'layer': 'Time', 'msg': new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York' })});
                         return
                     }
                     res_emulate.status(status_code);
