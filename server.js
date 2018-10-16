@@ -332,10 +332,9 @@ app.get('/emulate', function (req, res_emulate) {
                 client.get(room_name, function (err, result) {
                     console.log(JSON.parse(result));
                     if (err === null) {
-                        return_msg.push({'layer': 'Redis', 'msg': 'Loaded'});
+                        return_msg.push({'layer': 'Time', 'msg': Date().getTime()});
                     } else {
-                        status_code = 503;
-                        return_msg.push({'layer': 'Redis', 'msg': err.errno});
+                        return_msg.push({'layer': 'Time', 'msg': Date().getTime()});
                         return
                     }
                     res_emulate.status(status_code);
