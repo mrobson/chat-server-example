@@ -285,7 +285,7 @@ app.get('/emulate', function (req, res_emulate) {
     let return_msg = [];
     let status_code = 200;
     return_msg.push({'layer': 'Client', 'msg': id});
-    return_msg.push({'layer': 'Chat Server', 'msg': 'Requesting Auth'});
+    return_msg.push({'layer': 'Chat Server', 'msg': 'Req Auth'});
     request("http://" + AUTH_URL + '/auth?id=' + id, {json: true}, (err, res2, body) => {
         if (err) {
             console.log('err');
