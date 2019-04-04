@@ -30,7 +30,7 @@ app.use(cors({
 }));
 
 // Server Version
-const serverVersion = 'v2';
+const serverVersion = 'v1';
 
 // Redis variable
 let isRedisGood = false;
